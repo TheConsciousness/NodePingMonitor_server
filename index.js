@@ -1,16 +1,11 @@
 const express = require('express');
-const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 
 const app = express();
-const server = https.createServer(
-  {
-    key: fs.readFileSync('../ssl_certs/server.key'),
-    cert: fs.readFileSync('../ssl_certs/server.cert'),
-  },
-  app
-);
+const server = http.createServer(app);
+
 const io = require('socket.io')(server, {
   cors: {
     origin: "*",
