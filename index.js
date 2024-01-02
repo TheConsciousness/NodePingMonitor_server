@@ -10,8 +10,6 @@ const io = require('socket.io')(server, {
   cors: {
     origin: "*",
     methods: ["GET"],
-    secure: true,
-    rejectUnauthorized: false, // This line is necessary for self-signed certificates
     allowedHeaders: ["Access-Control-Allow-Origin"]
   }
 });
