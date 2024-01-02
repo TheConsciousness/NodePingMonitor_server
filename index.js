@@ -1,36 +1,22 @@
 const express = require('express');
 const http = require('http');
 const fs = require('fs');
-
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors({
+  origin: '*'
+}));
+
 const server = http.createServer(app);
 
-const io = require('socket.io')(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET"],
-    allowedHeaders: ["Access-Control-Allow-Origin"]
-  }
+app.get('/ping/:timestamp', (req, res) => {
+    const currentTimestamp = Date.now();
+    const timestamp = req.params.timestamp;
+    res.send(`${currentTimestamp - timestamp}`);
 });
 
-//app.use(express.static('client'));
-
-io.on('connection', (socket) => {
-  console.log('A user connected', socket.handshake.address);
-
-  socket.on('ping', (timestamp) => {
-    const pongTimestamp = Date.now();
-    const pingTime = pongTimestamp - timestamp;
-    socket.emit('pong', pingTime);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-});
-
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+server.listen(process.env.PORT || 3001, () => {
+    console.log('Server is listening on port 3001');
+})
