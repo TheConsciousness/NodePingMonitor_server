@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node index.js",
     "socket": "node socketversion.js",
+    "test": "jest --detectOpenHandles",
     "build": "npm install"
   },
   "author": "",
@@ -17,5 +18,9 @@
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   }
 }

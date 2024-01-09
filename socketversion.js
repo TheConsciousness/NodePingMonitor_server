@@ -40,7 +40,6 @@ app.get('/', (req, res) => {
 
 app.get('/ping', (req, res) => {
   const respHTML = "<p>Don't forget to add the trailing current epoch timestamp.</p><p>For example: /ping/1684730000</p>";
-  console.log(server);
   res.end(respHTML);
 });
 
@@ -53,3 +52,5 @@ app.get('/ping/:timestamp', (req, res) => {
 server.listen(PORT, () => {
   console.log(`Server is running on http://${os.hostname()}:${PORT}`);
 });
+
+module.exports = {app, server, io};
