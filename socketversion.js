@@ -2,12 +2,17 @@ const express = require('express');
 const http = require('http');
 const fs = require('fs');
 const os = require('os');
+const cors = require('cors');
 
 require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3001;
+
+app.use(cors({
+  origin: '*'
+}));
 
 const io = require('socket.io')(server, {
   cors: {
